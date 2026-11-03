@@ -12,14 +12,14 @@ inline expansion and browser notifications when DeepSeek goes down or recovers.
 ## Features
 
 - **Balance-style status card** — same surface, typography, padding and width as
-  the balance card. With `dsh-balance` installed it sits 8 px above the balance
-  card; without it, it takes the corner itself.
+  the balance card, collapsed to one line: just `服务` + the current overall
+  state. With `dsh-balance` installed it sits 8 px above the balance card;
+  without it, it takes the corner itself.
 - **Compact inline details** — click the card to expand it in place, exactly like
-  the balance card. The expanded card shows the overall state, the service-group
-  states (API / Chat) with 90-day group uptime, and the active incident's
-  title/status/time. There is **no per-component list, no update timeline, and no
-  recent-events history**; the card links to the official status page for that.
-  Click the card again (or the chevron) to collapse it.
+  the balance card. The expanded card lists **every service** and its current
+  state, grouped by API / Chat. There are **no descriptions, uptimes, update
+  timelines, or recent-events history**; the card links to the official status
+  page for that depth. Click the card again (or the chevron) to collapse it.
 - **Down/up notifications** — one browser notification on the
   operational ↔ non-operational transition, with a silent first-load baseline.
   Clicking a notification opens the status card's details.
@@ -57,12 +57,11 @@ systemctl --user restart dsh-web
 
 ## Using it
 
-- The **bottom-right status card** shows:
-  - `服务` + overall state (`正常` / `降级` / `部分中断` / `中断` / `维护` / `未知`);
-  - a status dot + `无活动事件` or the active-incident count;
-  - `更新于 HH:MM`.
-- Click it to expand the card in place: overall state, group states, and the
-  active incident if any. Click again or the chevron to collapse.
+- The **bottom-right status card** is one line: `服务` + overall state (`正常` /
+  `降级` / `部分中断` / `中断` / `维护` / `未知`) + chevron + refresh.
+- Click it to expand the card in place: overall state, all services grouped by
+  API / Chat with their current states, and the active incident if any. Click
+  again or the chevron to collapse.
 - The expanded card's `status.deepseek.com ↗` link opens the official page for
   full component details and history. The `⟳` icon in the card refreshes the
   summary. `启用通知` requests notification permission.
@@ -85,18 +84,17 @@ The host reads the public DeepSeek status page backend:
 | Endpoint | Used for |
 |---|---|
 | `summary/active` | overall state, page/section/component tree, active changes |
-| `summary/structure?start_at_from_seconds=…&start_at_to_seconds=…` | 90-day group uptime |
 
-The host polls the active feed at most every 30 seconds and caches structure for
-five minutes. The browser only calls the local summary route:
+The host polls the active feed at most every 30 seconds. The browser only calls
+the local summary route:
 
 ```text
 GET /api/deepseek-status/summary
 GET /api/deepseek-status/client.js   # the injected card script
 ```
 
-A group's state is the worst component state in that group. Overall state is the
-worst active change. The expanded card does not show per-component history;
+The expanded card lists each component's current state. Overall state is the
+worst active change. The card does not show uptime, descriptions or history;
 the official page is the place for that.
 
 The status page backend is not a documented API. A failed read yields
