@@ -1,6 +1,6 @@
 {
   "name": "dsh-deepseek-status",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "private": true,
   "type": "module",
   "main": "lib/index.js",
@@ -8,7 +8,7 @@
     ".": "./lib/index.js",
     "./package.json": "./package.json"
   },
-  "description": "DeepSeek service status card with detail popover and browser notifications for the DeepSeek Harness web UI",
+  "description": "DeepSeek service status card with compact inline details and browser notifications for the DeepSeek Harness web UI",
   "license": "MIT",
   "author": "zz0-0",
   "repository": {
