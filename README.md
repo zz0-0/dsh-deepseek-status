@@ -8,7 +8,7 @@ balance plugin** — always visible in the bottom-right corner, with a separate
 popout panel styled like the old balance detail panel and browser notifications
 when DeepSeek goes down or recovers.
 
-![Status card and separate popout panel](screenshot-final.png)
+![Status card and separate popout panel](screenshot-above.png)
 
 ## Features
 
@@ -140,7 +140,7 @@ systemctl --user restart dsh-web
 | `lib/index.js` | Host routes, caching, loopback fence, client injection |
 | `lib/status.js` | Public status feed fetch + normalization |
 | `lib/client.js` | One-line status card, separate popout panel, notifications |
-| `screenshot-final.png` | README screenshot |
+| `screenshot-above.png` | README screenshot |
 
 ## License
 

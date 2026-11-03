@@ -7,7 +7,7 @@
 固定在右下角，点击会打开一个独立弹层，使用旧版余额插件的详情面板样式；
 服务中断/恢复时发送浏览器通知。
 
-![状态卡片与独立的弹层详情面板](screenshot-final.png)
+![状态卡片与独立的弹层详情面板](screenshot-above.png)
 
 ## 功能
 
@@ -124,7 +124,7 @@ systemctl --user restart dsh-web
 | `lib/index.js` | Host 路由、缓存、回环校验、注入客户端脚本 |
 | `lib/status.js` | 公开状态源的抓取与归一化 |
 | `lib/client.js` | 一行状态卡、旧版余额面板样式弹层、通知 |
-| `screenshot-final.png` | README 截图 |
+| `screenshot-above.png` | README 截图 |
 
 ## 许可证
 
