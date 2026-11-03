@@ -3,30 +3,29 @@
 **English** | [简体中文](README.zh.md)
 
 A standalone [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness)
-(DSH) web plugin for **DeepSeek service status**: a direct bottom-right status
-strip, a native full status page, and browser notifications when DeepSeek goes
-down or recovers.
+(DSH) web plugin that puts **DeepSeek service status** in a **card like the
+balance plugin** — always visible in the bottom-right corner, with a detail
+popover and browser notifications when DeepSeek goes down or recovers.
 
-![DeepSeek status page](screenshot.png)
+![Status card and detail popover](screenshot.png)
 
 ## Features
 
-- **Direct status strip** — always visible in the bottom-right corner. When
+- **Always-visible status card** — fixed to the bottom-right corner. When
   `dsh-balance` is installed it sits 8 px above the balance card; without it, it
-  sits in the corner itself. It shows the overall state and active-incident
-  count, and opens the status page on click.
-- **Native status page** — a global `状态` / `Status` entry in the left sidebar
-  opens a real DSH main panel: grouped components with 90-day uptime, active
-  incident timeline, and recent incidents/maintenance for the last 7/30/90 days.
+  takes the corner itself. The card shows the overall state, active-incident
+  count and last update time.
+- **Detail popover, not a page** — click the card to open a status popover above
+  it: overall state, grouped components with 90-day uptime, active incident with
+  its update timeline, and the last 30 days of incidents/maintenance. The
+  popover closes on outside click or `Esc`.
 - **Down/up notifications** — one browser notification on the
-  operational ↔ non-operational transition, with a silent baseline on the first
-  load and a click that opens the status page. Notifications are optional and
-  only fire after permission is granted.
-- **No DeepSeek credentials** — the status feed is public, so the plugin works
-  without an API key and independently of `dsh-balance`.
-- **Not a second card stack** — the status plugin owns one compact strip, not a
-  full second card. When the status page is open, the strip and the balance card
-  step aside so the page gets the full width.
+  operational ↔ non-operational transition. The first load is a silent baseline;
+  clicking a notification opens the status popover.
+- **No DeepSeek credentials** — the status feed is public, so it works without an
+  API key and independently of `dsh-balance`.
+- **No sidebar entry, no status page** — the card and its popover are the whole
+  UI. The balance plugin keeps its own card and its own popover.
 - **Bilingual and themed** — Chinese/English labels, DSH menu-surface tokens,
   light/dark theme support.
 
@@ -47,9 +46,9 @@ dsh plugin --profile web add github:zz0-0/dsh-deepseek-status
 systemctl --user restart dsh-web
 ```
 
-Then **hard-refresh** the DSH web page. The plugin has a host half (status
-routes) and a browser half (page, sidebar entry, strip), so it needs the restart
-as well as the refresh.
+Then **hard-refresh** the DSH web page. The plugin has a host half (the status
+routes and the injected card script), so it needs the restart as well as the
+refresh.
 
 Remove:
 
@@ -60,31 +59,32 @@ systemctl --user restart dsh-web
 
 ## Using it
 
-- The **left sidebar** gets a `状态` entry with a colored status dot.
-- The **bottom-right strip** is the direct glance. Green = operational, amber =
-  degraded/partial, red = full outage, blue = maintenance, gray = unknown.
-- Clicking the strip or the sidebar entry opens the status page.
-- Clicking **启用通知** on the page requests notification permission. Once
-  granted, transitions from operational to any incident state, and back to
-  operational, produce one browser notification each. Clicking a notification
-  opens the status page.
-- The page's `7天/30天/90天` buttons switch the recent-history window; `⟳`
-  refreshes the summary and the selected history window.
+- The **bottom-right status card** is the direct view. Green = operational,
+  amber = degraded/partial, red = full outage, blue = maintenance, gray =
+  unknown. The second line shows the active-incident count; the third shows
+  `更新于 HH:MM`.
+- Click the card to open the detail popover. It has the overall state, each
+  component with its 90-day uptime, the active incident and its updates, and the
+  recent 30-day event list.
+- The popover's `⟳` refreshes status and history; the official status-page link
+  opens the full DeepSeek page.
+- Click **启用通知** in the popover to request notification permission. After
+  that, operational → incident and incident → operational each produce one
+  notification. Clicking it opens the card's popover.
+- Outside click or `Esc` closes the popover.
 
 ## Placement with `dsh-balance`
 
-The two plugins do not fight for the corner:
+The two plugins share the corner without a second card stack:
 
 - `dsh-balance` keeps its balance card at bottom-right.
-- `dsh-deepseek-status` places its strip 8 px above that card.
-- While the status page is open, both the strip and the balance card are hidden
-  (the page already shows status); returning to a conversation or another panel
-  restores them.
-- If only `dsh-deepseek-status` is installed, the strip takes the bottom-right
-  corner itself and still avoids the composer/status row.
+- `dsh-deepseek-status` places its status card 8 px above that card.
+- Both cards stay visible, and each opens its **own** detail popover.
+- If only `dsh-deepseek-status` is installed, its card takes the bottom-right
+  corner itself and avoids the composer/status row.
 
-The status feature was removed from `dsh-balance` (0.2.1), so the new plugin is
-the single owner of status polling and status UI.
+Status was removed from `dsh-balance` (0.2.1), so this plugin is the single owner
+of status polling and status UI.
 
 ## Data
 
@@ -95,42 +95,43 @@ status page uses):
 |---|---|
 | `summary/active` | overall state, page/section/component tree, active changes |
 | `summary/structure?start_at_from_seconds=…&start_at_to_seconds=…` | 90-day component/section uptime |
-| `change/list?start_at_seconds=…&end_at_seconds=…` | recent incidents/maintenance and their update timelines |
+| `change/list?start_at_seconds=…&end_at_seconds=…` | recent incidents/maintenance and update timelines |
 
 The host polls the active feed at most every 30 seconds and caches structure and
 history for five minutes. The browser talks only to the local DSH server:
 
 - `GET /api/deepseek-status/summary`
 - `GET /api/deepseek-status/history?days=30`
+- `GET /api/deepseek-status/client.js` — the injected card script
 
-Component status is derived from the active changes' component statuses; without
-an active change, components are operational. Overall status is the worst active
-change. Uptime is the status page's own 90-day figure.
+Component status is derived from active changes; without an active change,
+components are operational. Overall status is the worst active change. Uptime is
+the status page's own 90-day figure.
 
-Because the status page backend is not a documented API, a failed read yields
-`状态未知` (with the official status-page link) rather than a false outage.
+The status page backend is not a documented API. A failed read yields
+`状态未知` with the official status-page link rather than a false outage.
 
 ## Privacy
 
 - **Outbound requests**: only `status.deepseek.com` (the public status feed and
   its page). No credentials, no API key, no telemetry.
-- **Local-only**: the browser requests only the two local `/api/deepseek-status`
+- **Local-only**: the browser requests only the local `/api/deepseek-status`
   routes.
-- **Notifications**: browser notifications are generated locally on status
-  transitions; no push service is involved. A closed browser receives none.
+- **Notifications**: generated locally on status transitions; no push service.
+  A closed browser receives none.
 
 ## Compatibility
 
 - DSH **0.2.1.x** only, enforced by `engines.dsh`.
-- The browser half uses DSH's native `main` panel and `sidebar.panellist` slots,
-  the same mechanism as the official Plugins page, plus `locale` and `layout`.
+- The browser side is a classic script injected into the DSH index page, the
+  same pattern as `dsh-balance`. It does not patch React and it registers no
+  sidebar/page slots.
 - The status backend is a public third-party service page. The parser is
-  defensive and the page shows an explicit unknown state if it changes.
+  defensive.
 
 ## Development
 
-The plugin has no build step: plain ESM host code and a hand-written
-`__ModuleLoader__` browser bundle.
+No build step: plain ESM on the host and a classic script for the browser.
 
 ```bash
 git clone https://github.com/zz0-0/dsh-deepseek-status.git
@@ -142,19 +143,18 @@ systemctl --user restart dsh-web
 - Host changes (`lib/index.js`, `lib/status.js`) require a `dsh web` restart.
 - Browser changes (`lib/client.js`) are served with `Cache-Control: no-store`;
   hard-refresh the page.
-- The client bundle registers the page (`main` key `deepseek-status`), the
-  sidebar icon (`sidebar.panellist` id `deepseek-status`), and the always-visible
-  strip. It polls the host summary every 30 seconds.
+- The injected script fetches the host summary every 30 seconds and renders the
+  card and popover.
 
 ### Files
 
 | File | Role |
 |---|---|
-| `package.json` | DSH bundle + client metadata |
+| `package.json` | DSH bundle metadata |
 | `cordis.patch.yml` | Inserts the host entry into the web profile |
-| `lib/index.js` | Host routes, caching, loopback fence |
+| `lib/index.js` | Host routes, caching, loopback fence, client injection |
 | `lib/status.js` | Public status feed fetch + normalization |
-| `lib/client.js` | Native page, sidebar entry, direct strip, notifications |
+| `lib/client.js` | Bottom-right card, detail popover, notifications |
 | `screenshot.png` | README screenshot |
 
 ## License
