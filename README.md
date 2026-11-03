@@ -7,7 +7,7 @@ A standalone [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness)
 balance plugin** — always visible in the bottom-right corner, with a compact
 inline expansion and browser notifications when DeepSeek goes down or recovers.
 
-![Status card with compact all-services details](screenshot.png)
+![Status card with compact all-services details](screenshot-detail.png)
 
 ## Features
 
@@ -137,7 +137,7 @@ systemctl --user restart dsh-web
 | `lib/index.js` | Host routes, caching, loopback fence, client injection |
 | `lib/status.js` | Public status feed fetch + normalization |
 | `lib/client.js` | Status card, inline details, notifications |
-| `screenshot.png` | README screenshot |
+| `screenshot-detail.png` | README screenshot |
 
 ## License
 

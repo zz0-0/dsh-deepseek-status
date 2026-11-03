@@ -6,7 +6,7 @@
 （DSH）Web 插件：用一张**和余额插件同款的紧凑卡片**显示 **DeepSeek 服务状态**，
 固定在右下角，点击可在卡片内展开紧凑详情；服务中断/恢复时发送浏览器通知。
 
-![状态卡片与紧凑的全部服务详情](screenshot.png)
+![状态卡片与紧凑的全部服务详情](screenshot-detail.png)
 
 ## 功能
 
@@ -122,7 +122,7 @@ systemctl --user restart dsh-web
 | `lib/index.js` | Host 路由、缓存、回环校验、注入客户端脚本 |
 | `lib/status.js` | 公开状态源的抓取与归一化 |
 | `lib/client.js` | 状态卡片、卡片内详情、通知 |
-| `screenshot.png` | README 截图 |
+| `screenshot-detail.png` | README 截图 |
 
 ## 许可证
 
