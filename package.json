@@ -1,6 +1,6 @@
 {
   "name": "dsh-deepseek-status",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "private": true,
   "type": "module",
   "main": "lib/index.js",
@@ -8,7 +8,7 @@
     ".": "./lib/index.js",
     "./package.json": "./package.json"
   },
-  "description": "One-line DeepSeek service status card with a separate balance-style popup detail card for the DeepSeek Harness web UI",
+  "description": "One-line DeepSeek service status card with a separate old-balance-style 400px popout panel for the DeepSeek Harness web UI",
   "license": "MIT",
   "author": "zz0-0",
   "repository": {
@@ -40,7 +40,7 @@
     "README.md",
     "README.zh.md",
     "LICENSE",
-    "screenshot-popup.png"
+    "screenshot-panel.png"
   ],
   "dsh": {
     "bundle": {
