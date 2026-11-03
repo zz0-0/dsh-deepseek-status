@@ -1,6 +1,6 @@
 {
   "name": "dsh-deepseek-status",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "private": true,
   "type": "module",
   "main": "lib/index.js",
@@ -40,7 +40,7 @@
     "README.md",
     "README.zh.md",
     "LICENSE",
-    "screenshot-panel.png"
+    "screenshot-panel-dots.png"
   ],
   "dsh": {
     "bundle": {
