@@ -1,0 +1,8 @@
+# dsh-deepseek-status bundle patch: mounts the host half (public DeepSeek
+# status-page fetcher and normalized JSON routes) into the profile
+# composition. The `dsh.client` declaration in package.json loads the browser
+# half, which registers the status page and sidebar entry and owns the
+# bottom-right status strip.
+- insert:
+    - id: deepseek-status
+      name: dsh-deepseek-status
