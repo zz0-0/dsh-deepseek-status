@@ -35,8 +35,9 @@ when DeepSeek goes down or recovers.
 
 ## Requirements
 
-- **DSH 0.2.1.x** with the web profile. Tested with `0.2.1-rc.3`; the package
-  declares `engines.dsh = ">=0.2.1-0 <0.2.2-0"`.
+- **DSH 0.2.x** (0.2.1 and 0.2.2 lines) with the web profile. Tested with
+  `0.2.2-rc.1`; the package declares
+  `engines.dsh = ">=0.2.1-0 <0.3.0-0"`.
 - Node.js `^22.19.0 || >=24.0.0` (the DSH requirement).
 - Browser notification permission for the DSH site, only if you want the
   down/up notifications.
@@ -113,7 +114,7 @@ The status page backend is not a documented API. A failed read yields
 
 ## Compatibility
 
-- DSH **0.2.1.x** only, enforced by `engines.dsh`.
+- DSH **0.2.x** (0.2.1 and 0.2.2 lines), enforced by `engines.dsh`.
 - The browser side is a classic script injected into the DSH index page, the same
   pattern as `dsh-balance`; no React patch and no sidebar/page slots.
 - The parser is defensive against changes in the public status page.
