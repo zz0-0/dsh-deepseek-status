@@ -95,3 +95,24 @@ test('an invalid history payload is reported, not thrown', () => {
   assert.equal(out.ok, false)
   assert.equal(out.items.length, 0)
 })
+
+test('skips a null history item instead of throwing', () => {
+  const payload = {
+    data: {
+      items: [
+        null,
+        {
+          change_id: 'h2',
+          type: 'incident',
+          start_at_seconds: 10,
+          close_at_seconds: 20,
+          updates: [],
+        },
+      ],
+    },
+  }
+  const out = normalizeHistory(payload, 1)
+  assert.equal(out.ok, true)
+  assert.equal(out.items.length, 1)
+  assert.equal(out.items[0].id, 'h2')
+})
