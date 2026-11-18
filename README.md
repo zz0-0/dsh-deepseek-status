@@ -16,13 +16,14 @@ when DeepSeek goes down or recovers.
   the balance card, collapsed to one line: just `服务` + the current overall
   state. With `dsh-balance` installed it sits 8 px above the balance card;
   without it, it takes the corner itself.
-- **Separate old-balance-style popout panel** — click the one-line status card and
-  a separate 400 px panel opens above it, using the old balance detail panel's
-  surface, header, rules and two-column layout. The one-line status card does
-  **not** expand. The panel lists **every service** and its current state, grouped
-  by API / Chat. There are **no descriptions, uptimes, update timelines, or
-  recent-events history**; the panel links to the official status page for that
-  depth. Click the card again, the `×`, outside, or press `Esc` to close it.
+- **Separate old-balance-style popout panel** — hover the one-line status card and
+  a separate 400 px panel opens above it (click to pin it; hover away, click the
+  card again, the `×`, outside, or press `Esc` to close). The panel uses the old
+  balance detail panel's surface, header, rules and two-column layout. The
+  one-line status card does **not** expand. The panel lists **every service** and
+  its current state, grouped by API / Chat. There are **no descriptions, uptimes,
+  update timelines, or recent-events history**; the panel links to the official
+  status page for that depth.
 - **Down/up notifications** — one browser notification on the
   operational ↔ non-operational transition, with a silent first-load baseline.
   Clicking a notification opens the status panel.
@@ -63,10 +64,11 @@ systemctl --user restart dsh-web
 
 - The **bottom-right status card** is one line: `服务` + overall state (`正常` /
   `降级` / `部分中断` / `中断` / `维护` / `未知`) + chevron + refresh.
-- Click it to open a **separate 400 px popout panel** above the one-line card:
+- Hover it to open a **separate 400 px popout panel** above the one-line card:
   overall state, all services grouped by API / Chat with their current states,
   and the active incident if any. The one-line card stays one line.
-- Close the panel with the card, the `×`, outside click, or `Esc`. The panel's
+- Click the card to pin the panel open. Hover away, click the card again, the
+  `×`, click outside, or press `Esc` to close. The panel's
   `status.deepseek.com ↗` link opens the official page for full detail; the
   `⟳` buttons refresh the summary; `启用通知` requests notification permission.
 
