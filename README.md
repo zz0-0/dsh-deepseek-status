@@ -16,8 +16,8 @@ the sidebar footer; the capture predates that move.*
 ## Features
 
 - **Sidebar-footer status chip** — a dot plus `服务` and the current overall
-  state, in one 22 px line directly above the Settings trigger, on the same
-  26 px line as `dsh-balance`'s chip (left), with the same inherited family and
+  state, in one 32 px row directly above the Settings trigger, on the same
+  32 px row as `dsh-balance`'s chip (left), with the same inherited family and
   the theme's secondary content size. In the 56 px rail the whole line hides,
   and below 768 px it lives in the navigation drawer.
 - **Balance-style popout panel** — hover or click the chip and a 400 px panel
@@ -32,7 +32,10 @@ the sidebar footer; the capture predates that move.*
   the service grid, and a foot with the official link and the actions.
 - **Down/up notifications** — one browser notification on the
   operational ↔ non-operational transition, with a silent first-load baseline.
-  Clicking a notification opens the status panel.
+  Clicking a notification opens the status panel. The panel's `Enable
+  notifications` action requests browser permission; once granted it sends one
+  confirmation notification and the action reads `Notifications on` (or
+  `Notifications blocked` when the browser has denied the site).
 - **No credentials** — the status feed is public; works without an API key and
   independently of `dsh-balance`.
 - **No sidebar entry, no status page** — the footer chip and its panel are the

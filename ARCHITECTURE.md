@@ -6,10 +6,10 @@
 
 - 不加凭据 / API key：状态源是公开的，独立于 `dsh-balance`。
 - chip 保持一行（点 + `服务` + 总体状态）；悬停/点击开独立的 400 px 面板，深度信息链官方 `status.deepseek.com`。
-- 布局：在侧栏 footer 的设置上方单独插一行（26px），和 `dsh-balance` 的 chip 共用（余额在左、状态在右）；footer 的 action 行留给 Cordis，不挤进去；不在视口里浮动，不避让 composer / 文件面板。
+- 布局：在侧栏 footer 的设置上方单独插一行（32px chip / 32px 行高，与会话 / 工作区行同高），和 `dsh-balance` 的 chip 共用（余额在左、状态在右）；footer 的 action 行留给 Cordis，不挤进去；不在视口里浮动，不避让 composer / 文件面板。
 - chip 与面板字体继承侧栏/正文，字号用 `--dsh-content-font-size-secondary`；行左右
   内边距 7px，文字与设置行同一列（20px 起），不跟列表的层级缩进；面板块序与余额插件一致：标题 + 更新时间 + 关闭 → 状态摘要（点 + 总体状态）→ 明细网格 → 页脚（官方链接在左，通知/刷新在右）→ 说明文字。
-- 通知只在 operational ↔ non-operational 转换时发；首载静默。
+- 通知只在 operational ↔ non-operational 转换时发；首载静默。弹层提供显式启用入口：授予权限后发一条确认通知，按钮显示「通知已开启」；拒绝时显示「通知被浏览器阻止」，不重复弹浏览器提示。
 - host 最多每 30 秒轮询 active feed；浏览器只调本地 summary 路由。
 - 读失败 → `状态未知` + 官方状态页链接，不报假故障。
 - 总状态 = 最严重的 active change；不显示 uptime、描述或历史。
