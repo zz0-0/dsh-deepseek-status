@@ -86,8 +86,8 @@ public `summary/active` feed, and the local summary route: [ARCHITECTURE.md](ARC
 
 - DSH **0.2.x** (0.2.1 and 0.2.2 lines), enforced by `engines.dsh`.
 - The browser side is a classic script injected into the DSH index page, the same
-  pattern as `dsh-balance`; no React patch. The chip is appended to the shell's
-  `[data-slot="sidebar.footer.action"]` row instead of a floating layer.
+  pattern as `dsh-balance`; no React patch. The chip sits in its own 32px row
+  above Settings; the `[data-slot="sidebar.footer.action"]` row is left to Cordis.
 - The parser is defensive against changes in the public status page.
 
 ## Development
