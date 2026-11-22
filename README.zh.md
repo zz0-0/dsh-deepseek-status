@@ -7,7 +7,7 @@
 chip 的右边；悬停或点击会打开一个独立弹层，使用余额插件的详情面板样式；服务中断/恢复
 时发送浏览器通知。
 
-![弹层详情面板](screenshot-above.png)
+![弹层详情面板](assets/screenshot-above.png)
 
 *截图是弹层；它现在从侧栏底部的那枚 chip 打开，截图拍于移动之前。*
 
@@ -93,7 +93,7 @@ systemctl --user restart dsh-web
 | `lib/index.js` | Host 路由、缓存、回环校验、注入客户端脚本 |
 | `lib/status.js` | 公开状态源的抓取与归一化 |
 | `lib/client.js` | 侧栏 footer 的状态 chip、余额面板样式弹层、通知 |
-| `screenshot-above.png` | README 截图 |
+| `assets/screenshot-above.png` | README 截图 |
 
 ## 许可证
 

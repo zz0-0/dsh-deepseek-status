@@ -8,7 +8,7 @@ the sidebar footer, beside the balance plugin's chip, with a separate popout
 panel styled like the balance detail panel and browser notifications when
 DeepSeek goes down or recovers.
 
-![Status popout panel](screenshot-above.png)
+![Status popout panel](assets/screenshot-above.png)
 
 *Screenshot: the popout panel. The one-line reading it opens from now lives in
 the sidebar footer; the capture predates that move.*
@@ -112,7 +112,7 @@ systemctl --user restart dsh-web
 | `lib/index.js` | Host routes, caching, loopback fence, client injection |
 | `lib/status.js` | Public status feed fetch + normalization |
 | `lib/client.js` | Sidebar-footer status chip, popout panel, notifications |
-| `screenshot-above.png` | README screenshot |
+| `assets/screenshot-above.png` | README screenshot |
 
 ## License
 
