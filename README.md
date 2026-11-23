@@ -117,3 +117,9 @@ systemctl --user restart dsh-web
 ## License
 
 [MIT](LICENSE)
+
+## 文档
+
+| 文档 | 回答什么 |
+|---|---|
+| [arch.md](docs/arch.md) |  |

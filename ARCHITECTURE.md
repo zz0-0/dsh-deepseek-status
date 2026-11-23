@@ -21,6 +21,11 @@
 | Host | `lib/index.js` | 读公开状态后端、维护 summary、提供 `GET /api/deepseek-status/summary` 和 `GET /api/deepseek-status/client.js` |
 | Browser | `lib/client.js` | 注入 DSH 首页：侧栏 footer 的状态 chip、弹出面板、通知 |
 | Status | `lib/status.js` | 状态映射 / 最严重状态 / 轮询逻辑 |
+| 载体 | `AGENTS.md`、`ARCHITECTURE.md`、`README.md`、`README.zh.md`、`LICENSE` | 人读入口与架构卡片 |
+| 构建 | `package.json`、`cordis.patch.yml` | 包声明 / bundle patch |
+| 资产 | `assets/` | README 截图 |
+| 测试 | `test/` | host / client 测试 |
+| 文档 | `docs/` | 架构视图 / 文档 |
 
 ## 数据
 
