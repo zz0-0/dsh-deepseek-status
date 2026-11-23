@@ -39,6 +39,13 @@ GET /api/deepseek-status/client.js   # the injected card script
 
 状态页后端不是有文档的 API；读失败就返回 `状态未知`，不把失败当故障。
 
+## 接口
+
+- Host → 浏览器：`GET /api/deepseek-status/summary`（总状态 / 明细 / 更新时间）、`GET /api/deepseek-status/client.js`（注入脚本）。
+- 上游：公开状态页 `summary/active`；读失败 → `状态未知`。
+- 注入：`ctx.webServer.tapIndex` 插 `client.js`；UI 落点是侧栏 footer 与余额 chip 共用的那一行。
+- 通知：浏览器 Notification API；只在 operational ↔ non-operational 转换时发。
+
 ## 边界
 
 - 没有 sidebar 入口、没有状态页；UI 就是 footer 里的 chip + 面板。
